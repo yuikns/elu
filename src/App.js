@@ -1,5 +1,4 @@
-import './styles/index.scss'
-import './styles/App.css'
+import './styles/App.scss'
 import logo from './images/logo.svg'
 import Home from './views/Home'
 import PoweredBy from './views/PoweredBy'

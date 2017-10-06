@@ -3,6 +3,9 @@ $defaultShadow: 1px 1px 2px #b5b5b5;
 $defaultButtonColorOnHover: #3ea6f8;
 $defaultDarkColor: #232323;
 
+
+// General Configurations
+
 html, body, #root {
   height: 100%;
 }
@@ -49,7 +52,7 @@ body {
   .Link {
     display: inline-block;
     margin: 10px;
-    padding: 10px;
+    padding: 11px;
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
@@ -190,5 +193,26 @@ div.DropDown-Content > p:first-child:first-letter {
 
 *:first-child + html .clearfix {
   zoom: 1;
+}
+
+// Customized Configurations
+
+.App {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.App-title {
+  margin-top: 20px;
+  margin-left: 15%;
+  font-size: 4em;
+}
+
+.App-content {
+  padding: 1em;
+  font-size: large;
+  width: 80%;
+  margin: 0 auto;
 }
 
