@@ -23,8 +23,8 @@ const App = () => (
                     </div>
                 </div>
             </div>
-            <div className="ClearFix BoxShadow" />
-            <div className="Content">
+            <div className="clearfix" />
+            <div className="Content BoxShadow">
                 <div className="App-content">
                     <Switch>
                         <Route exact path="/" component={Home} />

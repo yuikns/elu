@@ -7,6 +7,12 @@ html, body, #root {
   height: 100%;
 }
 
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 
 body {
   margin: 0;
@@ -71,15 +77,12 @@ body {
   }
 }
 
-.Content {  
-  float: left;
+.Content {
   width: 80%;
-  margin-top:5px;
-  margin-right: 20px;
-  margin-left: 10%;
-  background: #fff;
+  margin: 0 auto;
   border-right: 1px solid #d5d5d5;
   border-left: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
   line-height:24px;
   min-height: 75%;
   height: auto !important;
@@ -93,7 +96,8 @@ body {
   }
 
   .Post-content { 
-    position:relative; top:-10px;
+    position:relative;
+    top:-10px;
   }
 
   ul li{ 
@@ -156,9 +160,22 @@ div.DropDown-Content > p:first-child:first-letter {
   text-shadow: $defaultShadow;
 }
 
+
+// based on flex
+// how to easily in the center of your box?
+.Center {
+  // width required here
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
 // some workaround(s)
 
-.ClearFix:after {
+.clearfix:after {
   visibility: hidden;
   display: block;
   font-size: 0;
@@ -167,11 +184,11 @@ div.DropDown-Content > p:first-child:first-letter {
   height: 0;
 }
 
-* html .ClearFix {
+* html .clearfix {
   zoom: 1;
 }
 
-*:first-child + html .ClearFix {
+*:first-child + html .clearfix {
   zoom: 1;
 }
 

@@ -7,8 +7,6 @@ const About = ({ match }) => (
         <h2>About</h2>
         <hr />
         <h3>About <ArgcvText /></h3>
-        <div className="DropDown-Content">
-        </div>
         <p>
             <ArgcvText /> is the abbreviation
         of argc-argv. We can find paragraph from <em>5.1.2.2.1 Program startup</em> in &nbsp;
@@ -49,7 +47,7 @@ const About = ({ match }) => (
         <a href="https://github.com/yuikns">github</a> and <a href="http://cn.linkedin.com/in/yuikns">linkedin</a>. If
         it is necessary, you can give me an email and send to yu#argcv.com as well. I will keep your privacy, but unable
         to give the promise to give useful suggestion.</p>
-        <p>What? You wish to have a donation? Please click <a href="/donation">here</a>.</p>
+        <p>What? You wish to have a donation? Please click <a href="http://argcv.com/donation">here</a>.</p>
     </div>
 )
 

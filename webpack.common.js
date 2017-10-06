@@ -40,7 +40,7 @@ module.exports = ({
     // remove/clean your build folder(s) before building
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
     new HtmlWebpackPlugin({
-      title: 'ArgCV Elu',
+      title: 'ArgCV',
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
     })

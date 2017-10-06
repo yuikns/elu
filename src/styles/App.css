@@ -11,8 +11,9 @@
 }
 
 .App-content {
+  padding: 1em;
   font-size: large;
-  margin-right: 20px;
-  margin-left: 5%;
+  width: 80%;
+  margin: 0 auto;
 }
 
