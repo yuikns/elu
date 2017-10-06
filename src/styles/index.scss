@@ -1,94 +1,164 @@
-html, body {
+$defaultFontFamily: FantasqueSansMonoRegular, Arial, Verdana, "Microsoft YaHei", sans-serif;
+$defaultShadow: 1px 1px 2px #b5b5b5;
+$defaultButtonColorOnHover: #3ea6f8;
+$defaultDarkColor: #232323;
+
+html, body, #root {
+  height: 100%;
+}
+
+
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  font-family: $defaultFontFamily;
+  color: $defaultDarkColor;
+  background: url(../images/bg3.png) repeat;
+  font-size: 14px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
 }
 
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #333;
-  background: url(../images/bqbg.png) repeat;
-  font-size: 14px;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  margin: 0;
-  padding: 0;
+.Page {
+  //width: 960px;
+  margin: 0 auto;
+  padding-bottom: 120px;
+  height: 100%;
 }
 
-#root {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%; /*IE6不识别min-height*/
-  position: relative;
-  font-family: FantasqueSansMonoRegular, Arial, Verdana, "Microsoft YaHei", sans-serif;
-}
-
-nav {
-  padding: 20px;
-  background: #232323;
-}
-
-header {
+.Header {
   color: #fff;
-  background: #232323 url(../images/favicon.png) no-repeat right 10px;
+  background: $defaultDarkColor url(../images/logo.svg) no-repeat right 10px;
   background-size: contain;
   h1 {
     display: inline-block;
     padding: 0 20px;
   }
-  a {
+  .Link {
     display: inline-block;
     margin: 10px;
     padding: 10px;
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
-    &.active,
-    &:hover {
-      background-color: #3ea6f8;
+    &.active, &:hover {
+      background-color: $defaultButtonColorOnHover;
+      text-shadow: 0px 0px 3px $defaultDarkColor;
     }
   }
 }
 
-page {
-  //width: 960px;
-  margin: 0 auto;
-  padding-bottom: 120px; /*等于footer的高度*/
-  height: 100%;
+.Nav {
+  // background: $defaultDarkColor;
+  // margin-right: 12%;
+  background: url(../images/navbar.png) repeat-x; 
+  height: 100px;
+  // position: relative;
+  z-index:3;
+
+  .Nav-Content {
+    text-align: right;
+    top: 50px;
+    margin-right: 12%;
+    z-index: 4;
+    position: relative;
+  }
 }
 
-#content {
+.Content {  
   float: left;
   width: 80%;
+  margin-top:5px;
   margin-right: 20px;
   margin-left: 10%;
   background: #fff;
   border-right: 1px solid #d5d5d5;
   border-left: 1px solid #d5d5d5;
-  height: 100%;
+  line-height:24px;
+  min-height: 75%;
+  height: auto !important;
+  height: 75%; // IE6不识别min-height
+  padding:0 30px 0 30px;
+  background: #f9f9f9;
+  z-index:1;
+
+  .Content-header{
+    height:70px;
+  }
+
+  .Post-content { 
+    position:relative; top:-10px;
+  }
+
+  ul li{ 
+    background: url(../images/info.png) 
+    no-repeat; 
+    background-position:0px -61px;
+    text-indent:1.2em;
+    list-style: none;
+  }
+
+  blockquote{
+    clear:both;
+    display:block;
+    overflow:auto;
+    border:1px solid #ccc;
+    margin:10px 10px 0 10px;
+    padding:4px 10px;
+    width:auto;
+    background:url(../images/bqbg.png) repeat; 
+    font-size:14px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -khtml-border-radius:5px;
+  }
+  
 }
 
-footer {
+
+.Footer {
   color: #fff;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 30px; /*脚部的高度*/
-  background: #232323;
+  height: 30px;
+  background: $defaultDarkColor;
   clear: both;
 }
 
-section {
+.Section {
   padding: 20px;
 }
 
-.clearfix:after {
+/* drop down first character */
+div.DropDown-Content > p:first-child:first-letter {
+  float:left;
+  font-size:4em;
+  color: #0099ff;
+  margin-right:0.10em;
+  line-height:90%;
+  text-shadow:$defaultShadow;
+  }
+
+
+.BoxShadow {
+  box-shadow: $defaultShadow;
+}
+
+.TextShadow {
+  text-shadow: $defaultShadow;
+}
+
+// some workaround(s)
+
+.ClearFix:after {
   visibility: hidden;
   display: block;
   font-size: 0;
@@ -97,13 +167,11 @@ section {
   height: 0;
 }
 
-* html .clearfix {
+* html .ClearFix {
   zoom: 1;
 }
 
-/* IE6 */
-*:first-child + html .clearfix {
+*:first-child + html .ClearFix {
   zoom: 1;
 }
 
-/* IE7 */
