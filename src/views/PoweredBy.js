@@ -1,43 +1,62 @@
 import { dependencies, devDependencies } from '../../package.json'
 
 import React from 'react'
-import { Switch, BrowserRouter as Router, Route, NavLink, ActivePara } from 'react-router-dom'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
-const Deps = ({ match }) => {
+import FontAwesome from 'react-fontawesome'
+import 'react-tabs/style/react-tabs.less'
+
+const Deps = ({ type }) => {
+    const func = function (deps) {
+        return Object.keys(deps).
+            map((dep, i) =>
+                <li key={i}>
+                    <a href={`https://www.npmjs.com/package/${dep}`} > {dep}</a>
+                </li>)
+    }
+
     var myDeps = []
-    if (match.params.typeName == "dev-deps") {
-        const devDeps = Object.keys(devDependencies)
-            .map((dep, i) => <li key={i + 10}>{dep}</li>)
-        myDeps = devDeps
+    if (type == "dev-deps") {
+        // const devDeps = Object.keys()
+        //     .map((dep, i) => <li key={i}>{dep}</li>)
+        myDeps = func(devDependencies)
     } else {
-        const deps = Object.keys(dependencies)
-            .map((dep, i) => <li key={i}>{dep}</li>)
-        myDeps = deps
+        // const deps = Object.keys(dependencies)
+        //     .map((dep, i) => <li key={i}>{dep}</li>)
+        // myDeps = deps
+        myDeps = func(dependencies)
     }
     return (<ul>{[...myDeps]}</ul>)
 }
 
-const PoweredBy = ({ match }) => {
+export default class extends React.Component {
+    constructor(props) {
+        super(props)
+        this.props = props
+        this.state = { tabIndex: 0 }
+    }
 
+    onSelect(tabIndex) {
+        console.log("current index:", tabIndex)
+        this.setState({ tabIndex })
+    }
 
-    return (
-        <div>
+    render() {
+        let { match } = this.props
+        return (<div>
             <h2>Powered by</h2>
-            <ul>
-                <li><NavLink to={`${match.url}/deps`}> Using Dependencies: </NavLink></li>
-                <li>
-                    <NavLink to={`${match.url}/dev-deps`}> Using Dev-Dependencies:         </NavLink>
-                </li>
-            </ul>
-            <hr />
-            <div>
-                <Route path={`${match.url}/:typeName`} component={Deps} />
-                <Route exact path={match.url} render={() => (
-                    <h3>Please select a type.</h3>
-                )} />
-            </div>
-        </div>
-    )
+            <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.onSelect(tabIndex)}>
+                <TabList>
+                    <Tab>Dependencies</Tab>
+                    <Tab>Dev-Dependencies</Tab>
+                </TabList>
+                <TabPanel>
+                    <Deps type="deps" />
+                </TabPanel>
+                <TabPanel>
+                    <Deps type="dev-deps" />
+                </TabPanel>
+            </Tabs>
+        </div>)
+    }
 }
-
-export default PoweredBy

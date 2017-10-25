@@ -81,15 +81,15 @@ body {
 }
 
 .Content {
-  width: 80%;
+  width: 88%;
   margin: 0 auto;
   border-right: 1px solid #d5d5d5;
   border-left: 1px solid #d5d5d5;
   border-bottom: 1px solid #d5d5d5;
   line-height:24px;
-  min-height: 75%;
+  min-height: 73%;
   height: auto !important;
-  height: 75%; // IE6不识别min-height
+  height: 73%; // IE6不识别min-height
   padding:0 30px 0 30px;
   background: #f9f9f9;
   z-index:1;
@@ -103,9 +103,9 @@ body {
     top:-10px;
   }
 
-  ul li{ 
+  ul:not(.react-tabs__tab-list) li{
     background: url(../images/info.png) 
-    no-repeat; 
+    no-repeat;
     background-position:0px -61px;
     text-indent:1.2em;
     list-style: none;
@@ -132,11 +132,9 @@ body {
 
 .Footer {
   color: #fff;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  width: 100%;
-  height: 30px;
-  background: $defaultDarkColor;
+  height: 2em;
   clear: both;
 }
 
@@ -212,7 +210,104 @@ div.DropDown-Content > p:first-child:first-letter {
 .App-content {
   padding: 1em;
   font-size: large;
-  width: 80%;
+  width: 88%;
   margin: 0 auto;
 }
 
+.ThumbGrid {
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 0.5em;
+
+  .ThumbCard {
+    min-height: 50%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #444;
+    position: relative;
+    top: 0;
+    transition: all .1s ease-in;
+
+    &:hover {
+      top: -2px;
+      box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    }
+
+    .thumb {
+      padding-bottom: 60%;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .content {
+      padding: 1em;
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2em;
+      line-height: 1em;
+      margin: 0;
+      color: $defaultDarkColor;
+    }
+
+    p { 
+      flex: 1;
+      line-height: 1.4em;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: bold;
+      color: $defaultShadow;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin: 2em 0 0 0;
+    }
+  }
+
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .ThumbGrid {
+      grid-template-columns: 1fr;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) {
+//     .ThumbGrid {
+//         grid-template-columns: 1fr 1fr;
+//     }
+// }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+    .ThumbGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {
+//   .ThumbGrid {
+//       grid-template-columns: 1fr 1fr;
+//   }
+// }
+
+// Extra extra large devices (large desktops, 1408px and up)
+@media (min-width: 1408px) {
+  .ThumbGrid {
+      // grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+}

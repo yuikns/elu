@@ -4,14 +4,18 @@
   "private": true,
   "homepage": "http://argcv.com/",
   "dependencies": {
+    "axios": "^0.17.0",
     "font-awesome": "^4.7.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2"
+    "react-fontawesome": "^1.6.1",
+    "react-router-dom": "^4.2.2",
+    "react-tabs": "^2.1.0"
   },
   "scripts": {
     "start": "webpack-dev-server --open --hot --progress --inline --colors --config webpack.dev.js",
-    "build": "webpack --progress --colors --config webpack.prod.js"
+    "build": "webpack --progress --colors --config webpack.prod.js",
+    "gh-pages": "yarn build && gh-pages -d build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -23,6 +27,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
+    "gh-pages": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",

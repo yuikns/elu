@@ -33,6 +33,8 @@ const App = () => (
                     </Switch>
                 </div>
             </div>
+            <div className="clearfix" />
+            <div className="Footer" />
         </div>
     </Router>
 )
