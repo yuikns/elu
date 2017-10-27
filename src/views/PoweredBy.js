@@ -17,13 +17,8 @@ const Deps = ({ type }) => {
 
     var myDeps = []
     if (type == "dev-deps") {
-        // const devDeps = Object.keys()
-        //     .map((dep, i) => <li key={i}>{dep}</li>)
         myDeps = func(devDependencies)
     } else {
-        // const deps = Object.keys(dependencies)
-        //     .map((dep, i) => <li key={i}>{dep}</li>)
-        // myDeps = deps
         myDeps = func(dependencies)
     }
     return (<ul>{[...myDeps]}</ul>)
@@ -47,14 +42,14 @@ export default class extends React.Component {
             <h2>Powered by</h2>
             <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.onSelect(tabIndex)}>
                 <TabList>
-                    <Tab>Dependencies</Tab>
                     <Tab>Dev-Dependencies</Tab>
+                    <Tab>Dependencies</Tab>
                 </TabList>
                 <TabPanel>
-                    <Deps type="deps" />
+                    <Deps type="dev-deps" />
                 </TabPanel>
                 <TabPanel>
-                    <Deps type="dev-deps" />
+                    <Deps type="deps" />
                 </TabPanel>
             </Tabs>
         </div>)
