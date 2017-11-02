@@ -48,7 +48,7 @@ export default class GithubChangeLog extends React.Component {
                 console.log(res)
                 let { data } = res
                 this.setState({
-                    watchers: data.watchers,
+                    watchers: data.subscribers_count,
                     stargazers: data.stargazers_count,
                     forks: data.forks,
                     description: data.description,
