@@ -34,6 +34,14 @@ body {
   box-sizing: border-box;
 }
 
+a, u {
+  text-decoration: none;
+  color: black;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .Page {
   //width: 960px;
   margin: 0 auto;
@@ -45,10 +53,12 @@ body {
   color: #fff;
   background: $defaultDarkColor url(../images/logo.svg) no-repeat right 10px;
   background-size: contain;
+
   h1 {
     display: inline-block;
     padding: 0 20px;
   }
+
   .Link {
     display: inline-block;
     margin: 10px;

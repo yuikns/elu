@@ -2,8 +2,10 @@ import { dependencies, devDependencies } from '../../package.json'
 
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-
 import FontAwesome from 'react-fontawesome'
+
+import GithubChangeLog from '../components/GithubChangeLog'
+
 import 'react-tabs/style/react-tabs.less'
 
 const Deps = ({ type }) => {
@@ -11,10 +13,9 @@ const Deps = ({ type }) => {
         return Object.keys(deps).
             map((dep, i) =>
                 <li key={i}>
-                    <a href={`https://www.npmjs.com/package/${dep}`} > {dep}</a>
+                    <a href={`https://www.npmjs.com/package/${dep}`} >{dep} - {deps[dep]}</a>
                 </li>)
     }
-
     var myDeps = []
     if (type == "dev-deps") {
         myDeps = func(devDependencies)
@@ -32,7 +33,7 @@ export default class extends React.Component {
     }
 
     onSelect(tabIndex) {
-        console.log("current index:", tabIndex)
+        // console.log("current index:", tabIndex)
         this.setState({ tabIndex })
     }
 
@@ -42,9 +43,17 @@ export default class extends React.Component {
             <h2>Powered by</h2>
             <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.onSelect(tabIndex)}>
                 <TabList>
+                    <Tab><FontAwesome name="github" /> Project Elu</Tab>
+                    <Tab><FontAwesome name="github" /> Project ArgCV</Tab>
                     <Tab>Dev-Dependencies</Tab>
                     <Tab>Dependencies</Tab>
                 </TabList>
+                <TabPanel>
+                    <GithubChangeLog vendorName="yuikns" repoName="elu" />
+                </TabPanel>
+                <TabPanel>
+                    <GithubChangeLog vendorName="yuikns" repoName="argcv" />
+                </TabPanel>
                 <TabPanel>
                     <Deps type="dev-deps" />
                 </TabPanel>
