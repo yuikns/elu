@@ -13,8 +13,9 @@ const mediaUrl = blogV2BaseUrl + "/media/"
 export default class BlogPostList extends React.Component {
     constructor(props) {
         super(props)
+        let posts = []
         this.state = {
-            posts: []
+            posts: posts
         }
     }
 
@@ -22,24 +23,25 @@ export default class BlogPostList extends React.Component {
         axios.get(blogURL)
             .then(res => {
                 let posts = res.data.slice(0, 9)
-                this.setState({ posts })
-                posts.map((item, i) => this.requireMedia(i, item.featured_media))
+                Promise.all(posts.map((item, i) => {
+                    return this.requireMedia(item)
+                })).then(postsWithMediaUrl => {
+                    this.setState({ posts: postsWithMediaUrl })
+                })
             })
     }
 
-    requireMedia(postid, mediaId) {
-        let posts = this.state.posts
-        posts[postid].media_source_url = ""
-        this.setState({ posts })
+    async requireMedia(post) {
+        let mediaId = post.featured_media
         let mediaResUrl = mediaUrl + mediaId
-        axios.get(mediaResUrl)
-            .then(res => {
-                let url = res.data.source_url
-                let posts = this.state.posts
-                posts[postid].media_source_url = url
-                this.setState({ posts })
-            }).catch(function (error) {
+        let mediaSourceUrl = await axios.get(mediaResUrl)
+            .then(res => res.data.source_url)
+            .catch(function (error) {
+                console.log("error", error)
+                return ""
             })
+        post.media_source_url = mediaSourceUrl
+        return post
     }
 
     render() {
@@ -48,7 +50,7 @@ export default class BlogPostList extends React.Component {
             <div>
                 <h1>Recent Posts</h1>
                 <ThumbGrid cards={[...posts.map((item, i) => ({
-                    link: item.link,
+                    link: item.link || "",
                     title: HTMLDecode(item.title.rendered),
                     content: HTMLDecode(item.excerpt.rendered),
                     thumb: item.media_source_url,
