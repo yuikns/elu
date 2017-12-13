@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title'
 
 export const Host = function () {
     let hostname = window.location.hostname
-    if (hostname == "localhost" || hostname == "itermind") {
+    if (hostname == "localhost" || hostname == "itermind.com") {
         return "itermind"
     } else {
         return "argcv"
