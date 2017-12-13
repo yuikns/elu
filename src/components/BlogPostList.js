@@ -20,15 +20,23 @@ export default class BlogPostList extends React.Component {
     }
 
     componentWillMount() {
-        axios.get(blogURL)
-            .then(res => {
-                let posts = res.data.slice(0, 9)
-                Promise.all(posts.map((item, i) => {
-                    return this.requireMedia(item)
-                })).then(postsWithMediaUrl => {
-                    this.setState({ posts: postsWithMediaUrl })
-                })
-            })
+
+    }
+
+    async componentDidMount() {
+        let blogResp = await axios.get(blogURL)
+        let posts = blogResp.data.slice(0, 9)
+        this.setState({ posts })
+        posts.forEach(async (item, i) => {
+            this.requireMedia(item).then(pWithMedia =>
+                this.setState(prev => {
+                    let newPosts = prev.posts
+                    newPosts[i] = pWithMedia
+                    return {
+                        posts: newPosts
+                    }
+                }))
+        })
     }
 
     async requireMedia(post) {
