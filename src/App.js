@@ -4,7 +4,7 @@ import Home from './views/Home'
 import PoweredBy from './views/PoweredBy'
 import About from './views/About'
 import NoMatch from './views/NotMatched'
-import ArgcvText from './components/ArgcvText'
+import SiteSignatureText from './components/SiteSignatureText'
 
 import React from 'react'
 import { Switch, BrowserRouter as Router, Route, NavLink, ActivePara } from 'react-router-dom'
@@ -13,7 +13,7 @@ const App = () => (
     <Router>
         <div className="App">
             <div className="Header BoxShadow">
-                <a href="/"><h1 className="App-title"><ArgcvText /></h1></a>
+                <a href="/"><h1 className="App-title"><SiteSignatureText /></h1></a>
                 <div className="Nav">
                     <div className="Nav-Content">
                         <NavLink exact className="Link" to="/">Home</NavLink>

@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ThumbGrid from '../components/ThumbGrid'
 import BlogPostList from '../components/BlogPostList'
+import { Host, HostTitle } from '../components/SiteSignatureText'
 
 const greetings = [
     "Bal'a dash, malanore ",
@@ -42,6 +43,7 @@ const cards = [
 
 const Home = ({ match }) => (
     <div>
+        <HostTitle />
         <h4><span style={{ color: 'Red' }} className="TextShadow">{greetings[Math.floor(Math.random() * greetings.length)]}</span> welcome to my homepage~</h4>
         <hr />
         <BlogPostList />

@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import FontAwesome from 'react-fontawesome'
 
 import GithubChangeLog from '../components/GithubChangeLog'
+import { Host, HostTitle } from '../components/SiteSignatureText'
 
 import 'react-tabs/style/react-tabs.less'
 
@@ -40,6 +41,7 @@ export default class extends React.Component {
     render() {
         let { match } = this.props
         return (<div>
+            <HostTitle suffix="Powered by" />
             <h2>Powered by</h2>
             <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.onSelect(tabIndex)}>
                 <TabList>
