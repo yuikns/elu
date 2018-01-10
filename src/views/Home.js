@@ -43,7 +43,7 @@ const cards = [
 
 const Home = ({ match }) => (
     <div>
-        <HostTitle />
+        <HostTitle  suffix="enjoy coding, enjoy life." />
         <h4><span style={{ color: 'Red' }} className="TextShadow">{greetings[Math.floor(Math.random() * greetings.length)]}</span> welcome to my homepage~</h4>
         <hr />
         <BlogPostList />
