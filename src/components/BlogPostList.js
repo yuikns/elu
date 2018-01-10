@@ -10,17 +10,40 @@ const blogURL = blogV2BaseUrl + "/posts"
 const mediaUrl = blogV2BaseUrl + "/media/"
 
 
+export function GetBlogPost(id, andThen, orFailed) {
+    let url = blogURL + '/' + id
+    console.log("url:", url)
+    axios.get(url)
+        .then(res => andThen(res.data))
+        .catch(e => {
+            if(orFailed) {
+                orFailed(e)
+            }
+        })
+}
+
 export default class BlogPostList extends React.Component {
     constructor(props) {
         super(props)
         let posts = []
+        let { title } = props
         this.state = {
-            posts: posts
+            title: title,
+            posts: posts,
         }
     }
 
     componentWillMount() {
 
+    }
+    
+    componentWillReceiveProps(props) {
+        let posts = []
+        let { title } = props
+        this.setState({
+            title: title,
+            posts: posts,
+        })
     }
 
     async componentDidMount() {
@@ -56,7 +79,8 @@ export default class BlogPostList extends React.Component {
         let posts = this.state.posts
         return (
             <div>
-                <h1>Recent Posts</h1>
+                <h1>{this.state.title}</h1>
+                { this.state.title ? <hr/> : null}
                 <ThumbGrid cards={[...posts.map((item, i) => ({
                     link: item.link || "",
                     title: HTMLDecode(item.title.rendered),

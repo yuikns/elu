@@ -6,7 +6,7 @@ import { Host, HostTitle } from '../components/SiteSignatureText'
 const About = ({ match }) => (
     <div>
         <HostTitle suffix="About" />
-        <h2>About</h2>
+        <h1>About</h1>
         <hr />
 
         {

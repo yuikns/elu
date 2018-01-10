@@ -1,15 +1,14 @@
-
 import React from 'react'
-
-import { Link } from 'react-router-dom'
 import ThumbGrid from '../components/ThumbGrid'
-import BlogPostList from '../components/BlogPostList'
-import { Host, HostTitle } from '../components/SiteSignatureText'
+
+import { HostTitle } from '../components/SiteSignatureText'
+
+import '../styles/ThumbGrid.scss'
 
 const greetings = [
     "Bal'a dash, malanore ",
     "Doral ana'diel?",
-    "Sinu a'manore."
+    "Sinu a'manore.",
 ]
 
 const cards = [
@@ -38,19 +37,11 @@ const cards = [
     }
 ]
 
-
-
-
-const Home = ({ match }) => (
+export default ({ match }) => (
     <div>
         <HostTitle  suffix="enjoy coding, enjoy life." />
-        <h4><span style={{ color: 'Red' }} className="TextShadow">{greetings[Math.floor(Math.random() * greetings.length)]}</span> welcome to my homepage~</h4>
+        <h2 className="ComicFont">{greetings[Math.floor(Math.random() * greetings.length)]}</h2>
         <hr />
-        <BlogPostList />
-        <hr />
-        <h1>Teleport Portals</h1>
         <ThumbGrid cards={[...cards]} />
     </div >
 )
-
-export default Home

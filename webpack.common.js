@@ -22,7 +22,7 @@ module.exports = ({
     vendors: ['react', 'react-dom']
   },
   output: {
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].[hash:8].bundle.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
   },
@@ -31,9 +31,23 @@ module.exports = ({
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.jsx?$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['env'] } } },
+      { test: /\.sass$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      {
+        test: /\.jsx?$/, exclude: /node_modules/, use: {
+          loader: 'babel-loader', options: {
+            presets: [
+              "env",
+              "react",
+              "stage-2",
+            ],
+            // auto import antd https://github.com/ant-design/babel-plugin-import
+            plugins: [['import', { libraryName: 'antd', style: true }]],
+            cacheDirectory: true,
+          }
+        }
+      },
       { test: /\.(png|jpg|jpeg|gif|ico)$/, use: 'url-loader?limit=1024&name=images/[name].[ext]' },
-      { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, use: 'url-loader' }
+      { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, use: 'url-loader' },
     ]
   },
   plugins: [
@@ -43,9 +57,9 @@ module.exports = ({
       title: 'ArgCV',
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
-    })
+    }),
   ],
   resolve: {
-    extensions: ['.js', '.json', '.jsx']
-  }
+    extensions: ['.js', '.json', '.jsx'],
+  },
 })
