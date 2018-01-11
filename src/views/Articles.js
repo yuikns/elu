@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Route, Redirect } from 'react-router'
-import { Alert } from 'antd';
+import { Route } from 'react-router'
+import { Alert } from 'antd'
 
 
 import { GetBlogPost } from '../components/BlogPostList'

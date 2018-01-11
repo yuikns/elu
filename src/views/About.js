@@ -1,7 +1,71 @@
 import React from 'react'
+import { Alert } from 'antd'
 
 import SiteSignatureText from '../components/SiteSignatureText'
 import { Host, HostTitle } from '../components/SiteSignatureText'
+
+// import { GetBlogPage } from '../components/BlogPostList'
+//
+// export default class extends React.Component {
+//     constructor(props) {
+//         super(props)
+//         let id = 14
+//         this.state = {
+//             id: id,
+//             title: '',
+//             content: '',
+//             link: '',
+//             failed: false,
+//             failure_message: '',
+//         }
+//     }
+//
+//     componentDidMount() {
+//         GetBlogPage(
+//             this.state.id,
+//             (data) => {
+//                 console.log("Got: %o", data)
+//                 let {title, link, content} = data
+//                 console.log("Got: %o %o %o", title, link, content)
+//                 this.setState({
+//                     title: title.rendered,
+//                     link: link,
+//                     content: content.rendered,
+//                 })
+//             },
+//             (err) => {
+//                 this.setState({
+//                     failed: true,
+//                     failure_message: err.message,
+//                 })
+//             }
+//         )
+//
+//     }
+//
+//     render() {
+//         // let pathStr = this.props.location.pathname.substring(globalConfig.baseURI.length)
+//         // let path = pathStr.split("/").filter(function (n) { return n })
+//         // window.location = 'http://blog.argcv.com/articles/' + this.props.match.params.id + '.c'
+//         if(this.state.failed) {
+//             return (
+//                 <div className="">
+//                     <HostTitle suffix="About" />
+//                     <h1>Error! I Can Not Process Your Request...</h1>
+//                     <hr/>
+//                     <p>{this.state.failure_message}</p>
+//                 </div>
+//             )
+//         } else {
+//             return (
+//                 <div className="">
+//                     <HostTitle suffix="About" />
+//                     <div dangerouslySetInnerHTML={{ __html: this.state.content }} style={{ 'display': 'inline' }} />
+//                 </div>
+//             )
+//         }
+//     }
+// }
 
 const About = ({ match }) => (
     <div>

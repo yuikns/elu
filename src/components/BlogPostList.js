@@ -4,14 +4,27 @@ import React from 'react'
 import { HTMLDecode, FormatDateTime } from '../utils/utils'
 import ThumbGrid from './ThumbGrid'
 
-const blogBaseUrl = "https://blog.argcv.com/wp-json"
-const blogV2BaseUrl = blogBaseUrl + "/wp/v2"
-const blogURL = blogV2BaseUrl + "/posts"
-const mediaUrl = blogV2BaseUrl + "/media/"
+const blogBaseURL = "https://blog.argcv.com/wp-json"
+const blogV2BaseURL = blogBaseURL + "/wp/v2"
+const postURL = blogV2BaseURL + "/posts"
+const pageURL = blogV2BaseURL + "/pages"
+const mediaURL = blogV2BaseURL + "/media/"
 
 
 export function GetBlogPost(id, andThen, orFailed) {
-    let url = blogURL + '/' + id
+    let url = postURL + '/' + id
+    console.log("url:", url)
+    axios.get(url)
+        .then(res => andThen(res.data))
+        .catch(e => {
+            if(orFailed) {
+                orFailed(e)
+            }
+        })
+}
+
+export function GetBlogPage(id, andThen, orFailed) {
+    let url = pageURL + '/' + id
     console.log("url:", url)
     axios.get(url)
         .then(res => andThen(res.data))
@@ -47,7 +60,7 @@ export default class BlogPostList extends React.Component {
     }
 
     async componentDidMount() {
-        let blogResp = await axios.get(blogURL)
+        let blogResp = await axios.get(postURL)
         let posts = blogResp.data.slice(0, 9)
         this.setState({ posts })
         posts.forEach(async (item, i) => {
@@ -64,14 +77,14 @@ export default class BlogPostList extends React.Component {
 
     async requireMedia(post) {
         let mediaId = post.featured_media
-        let mediaResUrl = mediaUrl + mediaId
-        let mediaSourceUrl = await axios.get(mediaResUrl)
+        let mediaResURL = mediaURL + mediaId
+        let mediaSourceURL = await axios.get(mediaResURL)
             .then(res => res.data.source_url)
             .catch(function (error) {
                 console.log("error", error)
                 return ""
             })
-        post.media_source_url = mediaSourceUrl
+        post.media_source_url = mediaSourceURL
         return post
     }
 
