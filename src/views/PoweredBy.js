@@ -1,11 +1,12 @@
-import { dependencies, devDependencies } from '../../package.json'
-
 import React from 'react'
+import ReactGA from 'react-ga'
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import FontAwesome from 'react-fontawesome'
 
 import GithubChangeLog from '../components/GithubChangeLog'
 import { Host, HostTitle } from '../components/SiteSignatureText'
+import { dependencies, devDependencies } from '../../package.json'
 
 import 'react-tabs/style/react-tabs.less'
 
@@ -40,6 +41,7 @@ export default class extends React.Component {
 
     render() {
         let { match } = this.props
+        ReactGA.pageview(window.location.pathname + window.location.search)
         return (<div>
             <HostTitle suffix="Powered by" />
             <h2>Powered by</h2>

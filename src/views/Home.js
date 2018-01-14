@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactGA from 'react-ga'
+
 import ThumbGrid from '../components/ThumbGrid'
 
 import { HostTitle } from '../components/SiteSignatureText'
@@ -37,11 +39,14 @@ const cards = [
     }
 ]
 
-export default ({ match }) => (
-    <div>
-        <HostTitle  suffix="enjoy coding, enjoy life." />
-        <h2 className="ComicFont">{greetings[Math.floor(Math.random() * greetings.length)]}</h2>
-        <hr />
-        <ThumbGrid cards={[...cards]} />
-    </div >
-)
+export default ({ match }) => {
+    ReactGA.pageview(window.location.pathname + window.location.search)
+    return (
+        <div>
+            <HostTitle suffix="enjoy coding, enjoy life." />
+            <h2 className="ComicFont">{greetings[Math.floor(Math.random() * greetings.length)]}</h2>
+            <hr />
+            <ThumbGrid cards={[...cards]} />
+        </div >
+    )
+}

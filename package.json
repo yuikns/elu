@@ -2,7 +2,8 @@
   "name": "elu",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://argcv.com/",
+  "homepage": "https://argcv.com/",
+  "google_analytics": "UA-78609319-4",
   "dependencies": {
     "axios": "^0.17.0",
     "font-awesome": "^4.7.0",
@@ -10,6 +11,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
     "react-fontawesome": "^1.6.1",
+    "react-ga": "^2.4.1",
     "react-router-dom": "^4.2.2",
     "react-tabs": "^2.1.0"
   },

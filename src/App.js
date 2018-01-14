@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactGA from 'react-ga'
+
 import { Switch, BrowserRouter as Router, Route, NavLink, Link, ActivePara } from 'react-router-dom'
 import { Menu, Icon } from 'antd'
 
@@ -10,6 +12,7 @@ import PoweredBy from './views/PoweredBy'
 import NoMatch from './views/NotMatched'
 import Articles from './views/Articles'
 import SiteSignatureText from './components/SiteSignatureText'
+import { google_analytics } from '../package.json'
 
 import './styles/App.scss'
 
@@ -21,10 +24,10 @@ class MobileFriendlyNavBar extends React.Component {
         this.state = {
         }
     }
-    
+
     componentWillReceiveProps(props) {
     }
-    
+
     render() {
         let { location } = this.props
         let cKey = "/"
@@ -58,42 +61,62 @@ class MobileFriendlyNavBar extends React.Component {
     }
 }
 
-const App = () => (
-    <Router>
-        <div className="App">
-            <div className="App-DesktopOnly">
-                <div className="Header BoxShadow">
-                    <a href="/"><h1 className="App-title HandscriptFont"><SiteSignatureText /></h1></a>
-                    <div className="Nav">
-                        <div className="Nav-Content">
-                            <NavLink exact className="Link" to="/">Home</NavLink>
-                            <NavLink className="Link" to="/news">News</NavLink>
-                            <NavLink className="Link" to="/about">About</NavLink>
-                            <NavLink className="Link" to="/powered-by">PoweredBy</NavLink>
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        console.log("[GA] initialize")
+        ReactGA.initialize(google_analytics, {
+            debug: true,
+            titleCase: false,
+        })
+        this.state = {}
+    }
+
+    componentWillReceiveProps(props) {
+        console.log("id2:", google_analytics)
+    }
+
+    render() {
+        // ReactGA.pageview(window.location.pathname + window.location.search)
+        return (
+            <Router>
+                <div className="App">
+                    <div className="App-DesktopOnly">
+                        <div className="Header BoxShadow">
+                            <a href="/"><h1 className="App-title HandscriptFont"><SiteSignatureText /></h1></a>
+                            <div className="Nav">
+                                <div className="Nav-Content">
+                                    <NavLink exact className="Link" to="/">Home</NavLink>
+                                    <NavLink className="Link" to="/news">News</NavLink>
+                                    <NavLink className="Link" to="/about">About</NavLink>
+                                    <NavLink className="Link" to="/powered-by">PoweredBy</NavLink>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div className="App-MobileOnly">
+                        <MobileFriendlyNavBar location={location} />
+                    </div>
+                    <div className="clearfix" />
+                    <div className="Content BoxShadow">
+                        <div className="App-content">
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route path="/news" component={News} />
+                                <Route path="/about" component={About} />
+                                <Route path="/powered-by" component={PoweredBy} />
+                                <Route path="/articles/:id.c" component={Articles} />
+                                <Route component={NoMatch} />
+                            </Switch>
+                        </div>
+                    </div>
+                    <div className="clearfix" />
+                    <div className="Footer" />
                 </div>
-            </div>
-            <div className="App-MobileOnly">
-                <MobileFriendlyNavBar location={location} />
-            </div>
-            <div className="clearfix" />
-            <div className="Content BoxShadow">
-                <div className="App-content">
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/news" component={News} />
-                        <Route path="/about" component={About} />
-                        <Route path="/powered-by" component={PoweredBy} />
-                        <Route path="/articles/:id.c" component={Articles} />
-                        <Route component={NoMatch} />
-                    </Switch>
-                </div>
-            </div>
-            <div className="clearfix" />
-            <div className="Footer" />
-        </div>
-    </Router>
-)
+            </Router>
+        )
+    }
+
+}
 
 export default App

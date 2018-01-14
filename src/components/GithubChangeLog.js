@@ -45,7 +45,7 @@ export default class GithubChangeLog extends React.Component {
     componentWillMount() {
         axios.get(this.state.ghRepoApi)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 let { data } = res
                 this.setState({
                     watchers: data.subscribers_count,
@@ -60,7 +60,7 @@ export default class GithubChangeLog extends React.Component {
 
         axios.get(this.state.ghRepoApiCommits)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 let commits = res.data.slice(0, 100)
                 // commits = commits[0]
                 commits = commits.map((c, i) => {
@@ -86,7 +86,7 @@ export default class GithubChangeLog extends React.Component {
                         <a href={nc.html_url}>{nc.sha}</a> {nc.commit.message} --  by <a href={nc.author.url}>{nc.author.name}</a>
                     </li>
                 })
-                console.log(commits)
+                // console.log(commits)
                 this.setState({
                     commits: commits
                 })
