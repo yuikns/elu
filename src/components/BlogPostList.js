@@ -47,19 +47,23 @@ export default class BlogPostList extends React.Component {
     }
 
     componentWillMount() {
-
     }
     
     componentWillReceiveProps(props) {
-        let posts = []
-        let { title } = props
-        this.setState({
-            title: title,
-            posts: posts,
-        })
+        // let posts = []
+        // let { title } = props
+        // this.setState({
+        //     title: title,
+        //     posts: posts,
+        // })
+        // this.fetchData()
+    }
+    
+    componentDidMount() {
+        this.fetchData()
     }
 
-    async componentDidMount() {
+    fetchData = async () => {
         let blogResp = await axios.get(postURL)
         let posts = blogResp.data.slice(0, 9)
         this.setState({ posts })

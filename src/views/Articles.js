@@ -2,12 +2,36 @@ import React from 'react'
 import ReactGA from 'react-ga'
 
 import { Route } from 'react-router'
-import { Alert } from 'antd'
 
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 
 import { GetBlogPost } from '../components/BlogPostList'
 
-export default class extends React.Component {
+const styles = theme => ({
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    marginBottom: 16,
+    fontSize: 14,
+    color: theme.palette.text.secondary,
+  },
+  pos: {
+    marginBottom: 12,
+    color: theme.palette.text.secondary,
+  },
+})
+
+class Articles extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -47,6 +71,7 @@ export default class extends React.Component {
     }
 
     render() {
+        const { classes } = this.props
         ReactGA.pageview(window.location.pathname + window.location.search)
         // let pathStr = this.props.location.pathname.substring(globalConfig.baseURI.length)
         // let path = pathStr.split("/").filter(function (n) { return n })
@@ -62,14 +87,30 @@ export default class extends React.Component {
         } else {
             return (
                 <div className="">
-                    <Alert message={<span>Thank you for visiting my blog, however, this post is moved to <a href={this.state.link}>{this.state.link}</a> and you will be redirected the new location in 5 seconds...</span>} type="info" />
-                    <br />
-                    <br />
-                    <h1>{this.state.title}</h1>
-                    <hr />
-                    <div dangerouslySetInnerHTML={{ __html: this.state.content }} style={{ 'display': 'inline' }} />
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <Typography className={classes.pos}>
+                        Thank you for visiting my blog, however, this post is moved to <a href={this.state.link}>{this.state.link}</a> and you will be redirected the new location in 5 seconds...
+                      </Typography>
+                      <Typography variant="headline" component="h2">
+                        {this.state.title}
+                      </Typography>
+                      <Typography component="p">
+                        <span dangerouslySetInnerHTML={{ __html: this.state.content }} style={{ 'display': 'inline' }} />
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" href={this.state.link}>Learn More</Button>
+                    </CardActions>
+                  </Card>
                 </div>
             )
         }
     }
 }
+
+Articles.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(Articles);

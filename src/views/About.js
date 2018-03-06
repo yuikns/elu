@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactGA from 'react-ga'
 
-import { Alert } from 'antd'
+// import { Alert } from 'material-ui/Button'
 
 import SiteSignatureText from '../components/SiteSignatureText'
 import { Host, HostTitle } from '../components/SiteSignatureText'

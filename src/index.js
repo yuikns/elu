@@ -1,12 +1,53 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
+
 import App from './App'
-import { LocaleProvider } from 'antd'
-import enUS from 'antd/lib/locale-provider/en_US'
 
 import 'font-awesome/css/font-awesome.min.css'
 import './styles/index.scss'
 
-ReactDOM.render(<LocaleProvider locale={enUS}>
-    <App />
-</LocaleProvider>, document.getElementById('root'))
+
+import { google_analytics } from '../package.json'
+
+import Reboot from 'material-ui/Reboot'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
+import purple from 'material-ui/colors/purple'
+import grey from 'material-ui/colors/grey'
+import orange from 'material-ui/colors/orange'
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: orange,
+  },
+  status: {
+    danger: 'orange',
+  },
+})
+
+class Root extends React.Component {
+    constructor(props) {
+        super(props)
+        console.log("[GA] initialize")
+        ReactGA.initialize(google_analytics, {
+            debug: true,
+            titleCase: false,
+        })
+        this.state = {}
+    }
+
+    componentWillReceiveProps(props) {
+        console.log("google_analytics : ", google_analytics)
+    }
+
+    render() {
+        return (<MuiThemeProvider theme={theme}>
+                <Reboot />
+                <App />
+            </MuiThemeProvider>)
+    }
+
+}
+
+ReactDOM.render(<Root />, document.getElementById('root'))
+
