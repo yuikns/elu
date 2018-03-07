@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 
@@ -61,9 +61,7 @@ export default class GithubChangeLog extends React.Component {
 
         axios.get(this.state.ghRepoApiCommits)
             .then(res => {
-                // console.log(res)
                 let commits = res.data.slice(0, 100)
-                // commits = commits[0]
                 commits = commits.map((c, i) => {
                     let nc = {
                         sha: c.sha.substr(0, 8),
@@ -97,7 +95,7 @@ export default class GithubChangeLog extends React.Component {
     }
 
     render() {
-        return (<div>
+        return (<React.Fragment>
             <div>
                 <h2 style={{ "display": "inline-block", "marginLeft": "3%" }}>
                     <span><a href={this.state.vendorUrl}>{this.state.vendorName}</a> </span>/
@@ -114,7 +112,7 @@ export default class GithubChangeLog extends React.Component {
                 {[...this.state.commits]}
             </ul>
             <p><span><strong>updated at :</strong> {FormatDateTime(this.state.updated_at)}</span></p>
-        </div>)
+        </React.Fragment>)
     }
 
 }
