@@ -52,7 +52,8 @@ export default class GithubChangeLog extends React.Component {
                     stargazers: data.stargazers_count,
                     forks: data.forks,
                     description: data.description,
-                    updated_at: data.updated_at
+                    // updated_at: data.updated_at,
+                    updated_at: data.pushed_at,
                 })
             }).catch(e => {
                 console.log(e)
@@ -112,7 +113,7 @@ export default class GithubChangeLog extends React.Component {
             <ul>
                 {[...this.state.commits]}
             </ul>
-            <p><span><strong>updated at:</strong> {FormatDateTime(this.state.updated_at)}</span></p>
+            <p><span><strong>updated at :</strong> {FormatDateTime(this.state.updated_at)}</span></p>
         </div>)
     }
 
