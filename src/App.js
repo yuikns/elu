@@ -1,11 +1,12 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
+import classNames from 'classnames';
 
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
-import Button from 'material-ui/Button';
+import Button from 'material-ui/Button'
 import Toolbar from 'material-ui/Toolbar'
 import List from 'material-ui/List'
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
@@ -14,7 +15,7 @@ import IconButton from 'material-ui/IconButton'
 import Hidden from 'material-ui/Hidden'
 import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui-icons/Menu'
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 
 
 import { Switch, BrowserRouter as Router, Route, NavLink, Link, ActivePara } from 'react-router-dom'
@@ -60,29 +61,69 @@ const styles = theme => ({
     // [theme.breakpoints.up('md')]: {
     //   width: `calc(100%)`,
     // },
-        
+    // for shifting
+    // position: 'absolute',
+    transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
   },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+  // for shifting
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  toolbar: theme.mixins.toolbar,
+  'appBarShift-left': {
+    marginLeft: drawerWidth,
+  },
   menuButtons: {
     flexDirection: 'row-reverse',
-    marginLeft: -12,
+    marginLeft: 12,
     marginRight: 20,
+  },
+  // for shifting
+  hide: {
+    display: 'none',
   },
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
       position: 'relative',
     },
+    // for shifting
+    position: 'relative',
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+      // for shifting
+    transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  'content-left': {
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  'contentShift-left': {
+    marginLeft: 0,
   },
   textInPrimary: {
     backgroundColor: theme.palette.primary.main,
@@ -106,40 +147,48 @@ const MenuData = <div>
     </ListItem>
 </div>
 
-class MenuBar extends React.Component {
+class App extends React.Component {
   state = {
     mobileOpen: false,
+    open: false,
   }
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   }
+  
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  }
+
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  }
 
   render() {
     const { classes, theme } = this.props
-
-    const drawer = (
-      <div>
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>{MenuData}</List>
-      </div>
-    )
-
+    const { open } = this.state
+    
     return (
       <Router>
       <div className={classes.root}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
+        <AppBar 
+            className={classNames(classes.appBar, {
+              [classes.appBarShift]: open,
+              [classes[`appBarShift-left`]]: open,
+            })}
+        >
+          <Toolbar disableGutters={!open}>
+            <Hidden mdUp>
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.navIconHide}
+              onClick={this.handleDrawerOpen}
+              className={classNames(classes.menuButton, open && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
-             
+             </Hidden>
             <Button component={Link} to="/" >
               <Typography variant="title" color="inherit" noWrap className={classes.textInPrimary} >
                 <SiteSignatureText />
@@ -149,43 +198,33 @@ class MenuBar extends React.Component {
                 <Button component={Link} to="/news" className={classes.textInPrimary} > News </Button>
                 <Button component={Link} to="/about" className={classes.textInPrimary} > About </Button>
                 <Button component={Link} to="/powered-by" className={classes.textInPrimary} > PoweredBy </Button>
-              
             </Hidden>
           </Toolbar>
         </AppBar>
-        <Hidden mdUp>
+        
             <Drawer
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={this.state.mobileOpen}
-              onClose={this.handleDrawerToggle}
+              variant="persistent"
+              anchor="left"
+              open={open}
               classes={{
                 paper: classes.drawerPaper,
               }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
             >
-              {drawer}
+              <div className={classes.drawerHeader}>
+                <IconButton onClick={this.handleDrawerClose}>
+                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                </IconButton>
+              </div>
+              <Divider />
+              <List>{MenuData}</List>
             </Drawer>
-        </Hidden>
-
-        <Hidden smDown implementation="css">
-          {/* this part will always display in left*/}
-          { /*
-          <Drawer
-            variant="permanent"
-          open={false}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            {drawer}
-          </Drawer>
-              */}
-        </Hidden>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+            
+        <main className={classNames(classes.content, classes[`content-left`], {
+              [classes.contentShift]: open,
+              [classes[`contentShift-left`]]: open,
+            })}>
+            {/*  <div className={classes.toolbar} /> */}
+            <div className={classes.drawerHeader} />
           <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/news" component={News} />
@@ -203,10 +242,10 @@ class MenuBar extends React.Component {
   }
 }
 
-MenuBar.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles, { withTheme: true })(MenuBar)
+export default withStyles(styles, { withTheme: true })(App)
 
