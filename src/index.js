@@ -10,7 +10,7 @@ import './styles/index.scss'
 
 import { google_analytics } from '../package.json'
 
-import Reboot from 'material-ui/Reboot'
+import CssBaseline from 'material-ui/CssBaseline'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import purple from 'material-ui/colors/purple'
 import grey from 'material-ui/colors/grey'
@@ -42,7 +42,7 @@ class Root extends React.Component {
 
     render() {
         return (<MuiThemeProvider theme={theme}>
-                <Reboot />
+                <CssBaseline />
                 <App />
             </MuiThemeProvider>)
     }
