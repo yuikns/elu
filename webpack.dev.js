@@ -10,6 +10,8 @@ const devServer = {
 }
 
 module.exports = merge(common, {
+    // https://webpack.js.org/concepts/mode/
+    mode: 'development',
     devtool: 'inline-source-map',
     devServer: devServer
 })
