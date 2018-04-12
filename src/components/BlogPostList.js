@@ -60,22 +60,33 @@ export default class BlogPostList extends React.Component {
     }
     
     componentDidMount() {
-        this.fetchData()
+        this._ismounted = true
+        this.fetchData() // ?
+    }
+
+    componentWillUnmount() {
+       this._ismounted = false
     }
 
     fetchData = async () => {
         let blogResp = await axios.get(postURL)
         let posts = blogResp.data.slice(0, 9)
-        this.setState({ posts })
+        if (this._ismounted) {
+            this.setState({ posts }) // ??
+        } else {
+            return
+        }
         posts.forEach(async (item, i) => {
             this.requireMedia(item).then(pWithMedia =>
-                this.setState(prev => {
-                    let newPosts = prev.posts
-                    newPosts[i] = pWithMedia
-                    return {
-                        posts: newPosts
-                    }
-                }))
+                {if (this._ismounted) {
+                    this.setState(prev => {
+                        let newPosts = prev.posts
+                        newPosts[i] = pWithMedia
+                        return {
+                            posts: newPosts
+                        }
+                    })
+                }})
         })
     }
 

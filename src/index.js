@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
+import Loadable from 'react-loadable'
 
-import App from './App'
-
-import 'font-awesome/css/font-awesome.min.css'
+// import App from './App'
 import './styles/index.scss'
 
 
@@ -25,6 +24,13 @@ const theme = createMuiTheme({
   },
 })
 
+const LoadableApp = Loadable({
+  loader: () => import('./App'),
+  loading() {
+    return <div></div>
+  }
+})
+
 class Root extends React.Component {
     constructor(props) {
         super(props)
@@ -40,10 +46,16 @@ class Root extends React.Component {
         console.log("google_analytics : ", google_analytics)
     }
 
+    async componentDidMount() {
+        // import('font-awesome/css/font-awesome.min.css').then(_ => {
+        //     console.log("font-awesome is loaded..")
+        // })
+    }
+
     render() {
         return (<MuiThemeProvider theme={theme}>
                 <CssBaseline />
-                <App />
+                <LoadableApp />
             </MuiThemeProvider>)
     }
 

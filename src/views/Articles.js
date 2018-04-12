@@ -67,7 +67,6 @@ class Articles extends React.Component {
                 })
             }
         )
-
     }
 
     render() {

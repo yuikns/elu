@@ -19,10 +19,19 @@ let cleanOptions = {
 module.exports = ({
   entry: {
     index: path.resolve(__dirname, 'src/index.js'),
+    // submodules start
+    // app: path.resolve(__dirname, 'src/App.js'),
+    // about: path.resolve(__dirname, 'src/views/About.js'),
+    // articles: path.resolve(__dirname, 'src/views/Articles.js'),
+    // home: path.resolve(__dirname, 'src/views/Home.js'),
+    // news: path.resolve(__dirname, 'src/views/News.js'),
+    // poweredby: path.resolve(__dirname, 'src/views/PoweredBy.js'),
+    // submodules end
     vendors: ['react', 'react-dom']
   },
   output: {
     filename: 'js/[name].[hash:8].bundle.js',
+    chunkFilename: 'js/[name].[hash:8].bundle.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
   },
@@ -46,7 +55,7 @@ module.exports = ({
           }
         }
       },
-      { test: /\.(png|jpg|jpeg|gif|ico)$/, use: 'url-loader?limit=1024&name=images/[name].[ext]' },
+      { test: /\.(png|jpg|jpeg|gif|ico)$/, use: 'url-loader?limit=1024&name=image/[name].[hash:8].[ext]' },
       { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, use: 'url-loader' },
     ]
   },

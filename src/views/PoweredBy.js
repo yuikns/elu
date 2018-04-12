@@ -2,7 +2,13 @@ import React from 'react'
 import ReactGA from 'react-ga'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import FontAwesome from 'react-fontawesome'
+// import FontAwesome from 'react-fontawesome'
+
+// ref: https://github.com/gorangajic/react-icons
+// ref: https://octicons.github.com/
+import {GoMarkGithub, GoRepoClone } from 'react-icons/lib/go'
+
+
 
 import GithubChangeLog from '../components/GithubChangeLog'
 import { Host, HostTitle } from '../components/SiteSignatureText'
@@ -47,10 +53,10 @@ export default class extends React.Component {
             <h2>Powered by</h2>
             <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.onSelect(tabIndex)}>
                 <TabList>
-                    <Tab><FontAwesome name="github" /> Project Elu</Tab>
-                    <Tab><FontAwesome name="github" /> Project ArgCV</Tab>
-                    <Tab>Dev-Dependencies</Tab>
-                    <Tab>Dependencies</Tab>
+                    <Tab><GoMarkGithub /> Project Elu</Tab>
+                    <Tab><GoMarkGithub /> Project ArgCV</Tab>
+                    <Tab><GoRepoClone /> Dev-Dependencies</Tab>
+                    <Tab><GoRepoClone /> Dependencies</Tab>
                 </TabList>
                 <TabPanel>
                     <GithubChangeLog vendorName="yuikns" repoName="elu" />

@@ -1,4 +1,5 @@
 import React from 'react'
+import Loadable from 'react-loadable'
 
 import PropTypes from 'prop-types'
 import classNames from 'classnames';
@@ -14,8 +15,8 @@ import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 import Hidden from 'material-ui/Hidden'
 import Divider from 'material-ui/Divider'
-import MenuIcon from 'material-ui-icons/Menu'
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
+
+import {MdMenu, MdChevronLeft } from 'react-icons/lib/md'
 
 
 import { Switch, BrowserRouter as Router, Route, NavLink, Link, ActivePara } from 'react-router-dom'
@@ -24,17 +25,54 @@ import { Switch, BrowserRouter as Router, Route, NavLink, Link, ActivePara } fro
 
 
 import logo from './images/logo.svg'
-import Home from './views/Home'
-import News from './views/News'
-import About from './views/About'
-import PoweredBy from './views/PoweredBy'
+// import Home from './views/Home'
+// import News from './views/News'
+// import About from './views/About'
+// import Articles from './views/Articles'
+// import PoweredBy from './views/PoweredBy'
 import NoMatch from './views/NotMatched'
-import Articles from './views/Articles'
 import SiteSignatureText from './components/SiteSignatureText'
 
 import './styles/App.scss'
 
 // const SubMenu = Menu.SubMenu
+
+const LoadableHome = Loadable({
+  loader: () => import('./views/Home'),
+  loading() {
+    return <div></div>
+  }
+})
+
+const LoadableNews = Loadable({
+  loader: () => import('./views/News'),
+  loading() {
+    return <div></div>
+  }
+})
+
+const LoadableAbout = Loadable({
+  loader: () => import('./views/About'),
+  loading() {
+    return <div></div>
+  }
+})
+
+const LoadableArticles = Loadable({
+  loader: () => import('./views/Articles'),
+  loading() {
+    return <div></div>
+  }
+})
+
+const LoadablePoweredBy = Loadable({
+  loader: () => import('./views/PoweredBy'),
+  loading() {
+    return <div></div>
+  }
+})
+
+
 
 const drawerWidth = 240
 
@@ -186,7 +224,7 @@ class App extends React.Component {
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
-              <MenuIcon />
+              <MdMenu />
             </IconButton>
              </Hidden>
             <Button component={Link} to="/" >
@@ -212,7 +250,7 @@ class App extends React.Component {
             >
               <div className={classes.drawerHeader}>
                 <IconButton onClick={this.handleDrawerClose}>
-                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <MdChevronLeft />}
                 </IconButton>
               </div>
               <Divider />
@@ -226,11 +264,11 @@ class App extends React.Component {
             {/*  <div className={classes.toolbar} /> */}
             <div className={classes.drawerHeader} />
           <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/news" component={News} />
-                <Route path="/about" component={About} />
-                <Route path="/powered-by" component={PoweredBy} />
-                <Route path="/articles/:id.c" component={Articles} />
+                <Route exact path="/" component={LoadableHome} />
+                <Route path="/news" component={LoadableNews} />
+                <Route path="/about" component={LoadableAbout} />
+                <Route path="/powered-by" component={LoadablePoweredBy} />
+                <Route path="/articles/:id.c" component={LoadableArticles} />
                 <Route component={NoMatch} />
            </Switch>
            <div className="clearfix" />

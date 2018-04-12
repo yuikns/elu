@@ -1,6 +1,11 @@
 import axios from 'axios'
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
+
+// import FontAwesome from 'react-fontawesome'
+
+// ref: https://github.com/gorangajic/react-icons
+// ref: https://octicons.github.com/
+import {GoEye, GoStar, GoRepoForked} from 'react-icons/lib/go'
 
 import { FormatDateTime } from '../utils/utils'
 
@@ -102,9 +107,9 @@ export default class GithubChangeLog extends React.Component {
                     <span> <a href={this.state.repoUrl}>{this.state.repoName}</a></span>
                 </h2>
                 <p style={{ "display": "inline-block", "float": "right", "marginRight": "5%" }}>
-                    <a href={this.state.repoUrl + "/watchers"} ><FontAwesome name="eye" />&nbsp;Watchers {this.state.watchers}</a>&nbsp;
-                <a href={this.state.repoUrl + "/stargazers"} ><FontAwesome name="star" />&nbsp;Stargazers {this.state.stargazers}</a>&nbsp;
-                <a href={this.state.repoUrl + "/network/members"} ><FontAwesome name="code-fork" />&nbsp;Forks {this.state.forks}</a>
+                    <a href={this.state.repoUrl + "/watchers"} ><GoEye />&nbsp;Watchers {this.state.watchers}</a>&nbsp;
+                <a href={this.state.repoUrl + "/stargazers"} ><GoStar />&nbsp;Stargazers {this.state.stargazers}</a>&nbsp;
+                <a href={this.state.repoUrl + "/network/members"} ><GoRepoForked />&nbsp;Forks {this.state.forks}</a>
                 </p>
             </div>
             <div className="clearfix" />
