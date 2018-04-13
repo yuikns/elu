@@ -55,7 +55,7 @@ module.exports = ({
           }
         }
       },
-      { test: /\.(png|jpg|jpeg|gif|ico)$/, use: 'url-loader?limit=1024&name=image/[name].[hash:8].[ext]' },
+      { test: /\.(png|jpg|jpeg|gif|ico)$/, use: 'url-loader?limit=1024&name=images/[name].[hash:8].[ext]' },
       { test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/, use: 'url-loader' },
     ]
   },
