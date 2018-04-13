@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../styles/ThumbGrid.scss'
+
 class ThumbCard extends React.Component {
     render() {
         let { i, link, thumb, title, content, stamp, ...props } = this.props

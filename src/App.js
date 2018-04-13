@@ -16,7 +16,7 @@ import IconButton from 'material-ui/IconButton'
 import Hidden from 'material-ui/Hidden'
 import Divider from 'material-ui/Divider'
 
-import {MdMenu, MdChevronLeft } from 'react-icons/lib/md'
+import { MdMenu, MdChevronLeft } from 'react-icons/lib/md'
 
 
 import { Switch, BrowserRouter as Router, Route, NavLink, Link, ActivePara } from 'react-router-dom'

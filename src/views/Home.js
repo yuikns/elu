@@ -5,8 +5,6 @@ import ThumbGrid from '../components/ThumbGrid'
 
 import { HostTitle } from '../components/SiteSignatureText'
 
-import '../styles/ThumbGrid.scss'
-
 const greetings = [
     "Bal'a dash, malanore ",
     "Doral ana'diel?",
