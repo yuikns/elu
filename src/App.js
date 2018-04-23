@@ -72,6 +72,13 @@ const LoadablePoweredBy = Loadable({
   }
 })
 
+const LoadableHelloSlate = Loadable({
+  loader: () => import('./views/HelloSlate'),
+  loading() {
+    return <div></div>
+  }
+})
+
 
 
 const drawerWidth = 240
@@ -236,6 +243,7 @@ class App extends React.Component {
                 <Button component={Link} to="/news" className={classes.textInPrimary} > News </Button>
                 <Button component={Link} to="/about" className={classes.textInPrimary} > About </Button>
                 <Button component={Link} to="/powered-by" className={classes.textInPrimary} > PoweredBy </Button>
+                <Button component={Link} to="/slate" className={classes.textInPrimary} > Slate </Button>
             </Hidden>
           </Toolbar>
         </AppBar>
@@ -267,6 +275,7 @@ class App extends React.Component {
                 <Route exact path="/" component={LoadableHome} />
                 <Route path="/news" component={LoadableNews} />
                 <Route path="/about" component={LoadableAbout} />
+                <Route path="/slate" component={LoadableHelloSlate} />
                 <Route path="/powered-by" component={LoadablePoweredBy} />
                 <Route path="/articles/:id.c" component={LoadableArticles} />
                 <Route component={NoMatch} />
