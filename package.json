@@ -18,6 +18,7 @@
     "start": "webpack-dev-server --open --hot --progress --inline --colors --compress --config webpack.dev.js",
     "bundle": "webpack --progress --colors --mode=production --config webpack.bundle.js",
     "build": "webpack --progress --colors --mode=production --config webpack.prod.js",
+    "deploy": "webpack --display-error-details --mode=production --config webpack.prod.js",
     "gh-pages": "yarn build && gh-pages -d build"
   },
   "devDependencies": {
