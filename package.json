@@ -19,7 +19,7 @@
     "bundle": "webpack --progress --colors --mode=production --config webpack.bundle.js",
     "build": "webpack --progress --colors --mode=production --config webpack.prod.js",
     "deploy": "webpack --display-error-details --mode=production --config webpack.prod.js",
-    "gh-pages": "yarn build && gh-pages -d build"
+    "gh-pages": "yarn build && cp build/index.html build/404.html && touch build/.nojekyll && gh-pages -d build -b master -r git@github.com:yuikns/yuikns.github.io.git"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
