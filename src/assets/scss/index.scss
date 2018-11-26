@@ -1,0 +1,216 @@
+@import "./config.scss";
+
+// General Configurations
+
+html, body, #root {
+  height: 100%;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $defaultFontFamily;
+  color: $defaultDarkColor;
+  //  background: url(../img/bg3.png) repeat;
+  background-color: $defaultBodyBackgroundColor;
+  font-size: 14px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+a, u {
+  text-decoration: none;
+  color: black;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.Page {
+  //width: 960px;
+  margin: 0 auto;
+  padding-bottom: 120px;
+  height: 100%;
+}
+
+.Header {
+  color: #fff;
+  background: $defaultDarkColor url(../img/logo.svg) no-repeat right 10px;
+  background-size: contain;
+
+  h1 {
+    display: inline-block;
+    padding: 0 20px;
+  }
+
+  .Link {
+    display: inline-block;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 9px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    &.active, &:hover {
+      background-color: $defaultButtonColorOnHover;
+      text-shadow: 0px 0px 3px $defaultDarkColor;
+    }
+  }
+}
+
+.Nav {
+  // background: $defaultDarkColor;
+  // margin-right: 12%;
+  background: url(../img/navbar.png) repeat-x; 
+  height: 99px;
+  // position: relative;
+  z-index:3;
+
+  .Nav-Content {
+    text-align: right;
+    top: 50px;
+    margin-right: 12%;
+    z-index: 4;
+    position: relative;
+  }
+}
+
+.Content {
+  width: 88%;
+  margin: 0 auto;
+  border-right: 1px solid $defaultBorderColor;
+  border-left: 1px solid $defaultBorderColor;
+  border-bottom: 1px solid $defaultBorderColor;
+  line-height:24px;
+  min-height: 73%;
+  height: auto !important;
+  height: 73%; // IE6不识别min-height
+  padding:0 30px 0 30px;
+  background: $defaultContentBackgroundColor;
+  z-index:1;
+
+  .Content-header{
+    height:70px;
+  }
+
+  .Post-content { 
+    position:relative;
+    top:-10px;
+  }
+
+  ul:not(.react-tabs__tab-list) li{
+    background: url(../img/info.png) 
+    no-repeat;
+    background-position:0px -61px;
+    text-indent:1.2em;
+    list-style: none;
+  }
+
+  blockquote{
+    clear:both;
+    display:block;
+    overflow:auto;
+    border:1px solid #ccc;
+    margin:10px 10px 0 10px;
+    padding:4px 10px;
+    width:auto;
+    background:url(../img/bqbg.png) repeat; 
+    font-size:14px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -khtml-border-radius:5px;
+  }
+  
+}
+
+
+.Footer {
+  color: #fff;
+  position: relative;
+  bottom: 0;
+  height: 2em;
+  clear: both;
+}
+
+.Section {
+  padding: 20px;
+}
+
+/* drop down first character */
+div.DropDown-Content > p:first-child:first-letter {
+  float:left;
+  font-size:4em;
+  color: #0099ff;
+  margin-right:0.10em;
+  line-height:90%;
+  text-shadow:$defaultShadow;
+  }
+
+
+.BoxShadow {
+  box-shadow: $defaultShadow;
+}
+
+.TextShadow {
+  text-shadow: $defaultShadow;
+}
+
+
+// based on flex
+// how to easily in the center of your box?
+.Center {
+  // width required here
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+// some workaround(s)
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+* html .clearfix {
+  zoom: 1;
+}
+
+*:first-child + html .clearfix {
+  zoom: 1;
+}
+
+// some common asserts
+
+.HandscriptFont {
+  font-family: $handscriptFontFamily;
+}
+
+.ComicFont {
+  font-family: $comicFontFamily;
+}
+
+

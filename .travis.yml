@@ -1,0 +1,54 @@
+# ref: https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Travis-CI-supports-yarn
+
+# dist: trusty
+# sudo: required # sudo is NOT required in yarn
+
+cache:
+  yarn: true
+  directories:
+   - node_modules
+
+language: node_js
+
+node_js:
+  - "8"
+  - "9"
+  - "10"
+
+before_install:
+  - pwd # check current dir, result could be: /home/travis/build/yuikns/elu
+  - echo $PATH
+  - df -h
+  - date
+  - uname -a
+
+install:
+  - yarn install
+
+script:
+  - yarn deploy
+
+deploy:
+  # deploy master to production
+  - provider: script
+    keep-history: true
+    skip-cleanup: true
+    script: yarn install && yarn gh-pages
+    on:
+      branch: master
+  # # deploy develop to the staging environment
+  # - provider: script
+  #   script: bash scripts/deploy.sh staging
+  #   on:
+  #     branch: develop
+
+# notifications:
+#   webhooks:
+#     urls:
+#       - https://webhooks.gitter.im/e/8d14bff0d2d10ace5289 # argcv
+#       - https://webhooks.gitter.im/e/74810b212d49d753d9a2 # argcv/argcv
+#     on_success: always  # options: [always|never|change] default: always
+#     on_failure: always  # options: [always|never|change] default: always
+#     on_start: always    # options: [always|never|change] default: always
+
+
