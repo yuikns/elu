@@ -28,14 +28,14 @@ install:
 script:
   - yarn deploy
 
-deploy:
+#deploy:
   # deploy master to production
-  - provider: script
-    keep-history: true
-    skip-cleanup: true
-    script: yarn install && yarn gh-pages
-    on:
-      branch: master
+#  - provider: script
+#    keep-history: true
+#    skip-cleanup: true
+#    script: yarn install && yarn gh-pages
+#    on:
+#      branch: master
   # # deploy develop to the staging environment
   # - provider: script
   #   script: bash scripts/deploy.sh staging
