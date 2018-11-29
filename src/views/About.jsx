@@ -53,16 +53,6 @@ const About = ({ match }) => {
           System: A Programmer's Perspective</em> but still so weak.</p>
             <p>Life is so short, maybe tomorrow is the day to say goodbye. As for me, I can only write code, wish to make some
         contribution, as the recompense to my DNA, which gives me the ability to have perceptions.</p>
-            <h3>Contact</h3>
-            <p>You can find me in <a href="http://aminer.org/profile/yu-jing/55497c8e45cee4e68671bfb6">AMiner</a>, <a
-                href="https://plus.google.com/u/0/+YuJing"
-            >Google+</a>, <a href="http://weibo.com/1160137212">Sina Weibo</a>, <a
-                href="https://www.facebook.com/yu.jing.5b"
-            >facebook</a>, <a href="https://twitter.com/yujing5b5d">twitter</a>,
-        <a href="https://github.com/yuikns">github</a> and <a href="http://cn.linkedin.com/in/yuikns">linkedin</a>. If
-                        it is necessary, you can give me an email and send to yu#argcv.com as well. I will keep your privacy, but unable
-        to give the promise to give useful suggestion.</p>
-            <p>What? You wish to have a donation? Please click <a href="https://blog.argcv.com/donation">here</a>.</p>
         </div>
     )
 }
